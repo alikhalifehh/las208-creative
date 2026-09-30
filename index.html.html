@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emotions &amp; Emotional Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116;
+    --bg2:#141922;
+    --ink:#f4f1ea;
+    --muted:#a3a9b5;
+    --faint:#6b7280;
+    --red:#ff6b4a;
+    --amber:#ffc46b;
+    --teal:#43e0b8;
+    --blue:#6ea8ff;
+    --purple:#a897ff;
+    --line:rgba(255,255,255,.10);
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --safe-t:env(safe-area-inset-top,0px);
+    --safe-b:env(safe-area-inset-bottom,0px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(64px + var(--safe-t));-webkit-text-size-adjust:100%;}
+  body{
+    font-family:var(--sans);background:var(--bg);color:var(--ink);
+    line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--red);color:#fff;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    padding:calc(14px + var(--safe-t)) 22px 14px;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(14,17,22,.72);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{font-family:var(--serif);font-weight:600;font-size:16px;letter-spacing:.01em;}
+  nav .brand span{color:var(--red);}
+  nav .links{display:flex;gap:20px;}
+  nav .links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:color .25s;}
+  nav .links a:hover{color:var(--ink);}
+  @media(max-width:620px){nav .links{display:none;}}
+
+  section{padding:100px 22px;position:relative;}
+  .inner{max-width:760px;margin:0 auto;}
+
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:20px;}
+  .eyebrow.amber{color:var(--amber);}.eyebrow.teal{color:var(--teal);}
+  .eyebrow.blue{color:var(--blue);}.eyebrow.purple{color:var(--purple);}
+
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,7vw,50px);line-height:1.05;letter-spacing:-.02em;margin-bottom:22px;}
+  h2 em{font-style:italic;color:var(--red);}
+  .lead{font-size:clamp(17px,2.6vw,21px);color:var(--muted);max-width:60ch;}
+  .lead b{color:var(--ink);font-weight:600;}
+
+  /* HERO */
+  .hero{
+    min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;
+    padding-top:70px;padding-bottom:80px;position:relative;overflow:hidden;
+  }
+  .hero .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;animation:drift 16s ease-in-out infinite;}
+  .b1{width:340px;height:340px;background:#ff6b4a;top:-40px;right:-60px;}
+  .b2{width:300px;height:300px;background:#6a53c9;bottom:20px;left:-70px;animation-delay:-6s;}
+  .b3{width:260px;height:260px;background:#17a081;top:40%;right:20%;animation-delay:-11s;opacity:.4;}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.1);}66%{transform:translate(-20px,25px) scale(.95);}}
+  .hero .inner{position:relative;z-index:2;}
+  .hero .tag{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:8px 16px;border-radius:30px;margin-bottom:28px;}
+  .hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,12vw,92px);line-height:.98;letter-spacing:-.03em;margin-bottom:26px;}
+  .hero h1 .it{font-style:italic;font-weight:400;background:linear-gradient(100deg,#ff6b4a,#ffc46b,#43e0b8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p{font-size:clamp(17px,2.8vw,22px);color:var(--muted);max-width:52ch;margin-bottom:38px;}
+  .scroll-hint{display:flex;align-items:center;gap:10px;color:var(--faint);font-size:13px;letter-spacing:.05em;}
+  .scroll-hint .dot{width:22px;height:36px;border:1.5px solid var(--faint);border-radius:12px;position:relative;}
+  .scroll-hint .dot::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:6px;border-radius:3px;background:var(--faint);transform:translateX(-50%);animation:scrolldot 1.8s ease-in-out infinite;}
+  @keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0);}40%{opacity:1;}100%{opacity:0;transform:translate(-50%,12px);}}
+
+  .divider{height:1px;background:var(--line);max-width:760px;margin:0 auto;}
+
+  /* reveal — progressive enhancement, visible by default */
+  .r{opacity:1;transform:none;}
+  @supports (animation-timeline:view()){
+    @media(prefers-reduced-motion:no-preference){
+      .r{opacity:0;transform:translateY(40px);animation:reveal linear forwards;animation-timeline:view();animation-range:entry 0% entry 55%;}
+    }
+  }
+  @keyframes reveal{to{opacity:1;transform:none;}}
+
+  /* CORE card */
+  .core{background:linear-gradient(135deg,rgba(255,107,74,.16),rgba(255,107,74,.04));border:1px solid rgba(255,107,74,.28);border-radius:26px;padding:44px 34px;}
+  .core h2{margin-bottom:16px;}
+
+  /* BODY MAP */
+  .bodymap{display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:center;margin-top:44px;background:var(--bg2);border:1px solid var(--line);border-radius:26px;padding:32px 28px;}
+  @media(max-width:560px){.bodymap{grid-template-columns:1fr;justify-items:center;text-align:center;}}
+  .maplist{display:flex;flex-direction:column;gap:14px;}
+  .maprow{display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:500;}
+  .maprow .sw{width:12px;height:12px;border-radius:50%;flex:none;}
+  .maprow small{color:var(--muted);font-weight:400;}
+  .figure{width:150px;height:250px;position:relative;}
+  .figure svg{width:100%;height:100%;overflow:visible;}
+  .z{transform-origin:center;}
+  .zh{animation:pz 2.6s ease-in-out infinite;}
+  .zc{animation:pz 2.6s .3s ease-in-out infinite;}
+  .zt{animation:pzs 3.4s ease-in-out infinite;}
+  .zl{animation:pz 3s .6s ease-in-out infinite;}
+  @keyframes pz{0%,100%{transform:scale(1);opacity:.85;}50%{transform:scale(1.16);opacity:1;}}
+  @keyframes pzs{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.05);opacity:.8;}}
+
+  /* EI GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px;}
+  .cell{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:26px 20px;transition:transform .3s ease,border-color .3s ease,background .3s ease;}
+  .cell:hover{transform:translateY(-6px);border-color:rgba(255,196,107,.5);background:#191f2a;}
+  .cell .n{font-family:var(--serif);font-size:15px;color:var(--amber);margin-bottom:12px;}
+  .cell h3{font-size:17px;font-weight:600;margin-bottom:8px;}
+  .cell p{font-size:13.5px;color:var(--muted);line-height:1.5;}
+
+  /* SPECTRUM */
+  .spectrum{margin-top:44px;display:flex;align-items:stretch;gap:12px;}
+  @media(max-width:560px){.spectrum{flex-direction:column;}}
+  .pole{flex:1;border:1px solid var(--line);border-radius:20px;padding:24px 20px;background:var(--bg2);}
+  .pole.mid{border-color:rgba(67,224,184,.45);background:linear-gradient(135deg,rgba(67,224,184,.14),transparent);}
+  .pole .h{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
+  .pole.mid .h{color:var(--teal);}
+  .pole strong{font-size:17px;font-weight:600;display:block;margin-bottom:6px;}
+  .pole span{font-size:13.5px;color:var(--muted);}
+
+  /* WHY / quote */
+  .quote{margin-top:40px;border-left:3px solid var(--purple);padding:6px 0 6px 24px;}
+  .quote p{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.4vw,26px);line-height:1.4;color:var(--ink);}
+  .stat{margin-top:36px;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:26px 28px;}
+  .stat b{color:var(--purple);}
+
+  /* SOURCES / footer */
+  footer{background:var(--bg2);border-top:1px solid var(--line);padding:70px 22px calc(70px + var(--safe-b));}
+  footer .inner{max-width:760px;}
+  footer h2{font-size:clamp(24px,5vw,34px);margin-bottom:26px;}
+  .srclist{list-style:none;}
+  .srclist li{padding:16px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted);display:flex;gap:14px;}
+  .srclist li:first-child{border-top:none;}
+  .srclist li b{color:var(--ink);font-weight:600;flex:none;font-family:var(--serif);}
+  .colophon{margin-top:40px;font-size:12.5px;color:var(--faint);letter-spacing:.04em;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Emotions<span>.</span></div>
+  <div class="links">
+    <a href="#core">The idea</a>
+    <a href="#body">The body</a>
+    <a href="#ei">Skills</a>
+    <a href="#why">Why</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="inner">
+    <span class="tag">LAS 208 · Wellbeing Matters · Chapter 4</span>
+    <h1>Emotions &amp;<br><span class="it">Emotional Intelligence</span></h1>
+    <p>Feeling is automatic. Working with feeling — well — is a skill you can learn. Here's how it shapes your wellbeing.</p>
+    <div class="scroll-hint"><span class="dot"></span> Scroll to explore</div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<section id="core">
+  <div class="inner r">
+    <div class="core">
+      <p class="eyebrow">The core idea</p>
+      <h2>Feeling is automatic.<br><em>Managing</em> is learnable.</h2>
+      <p class="lead">We don't choose the first wave of an emotion. But we <b>can</b> build the awareness, the pause, and the response — the skills that protect our wellbeing and our relationships.</p>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <div class="inner r">
+    <p class="eyebrow blue">Concept one</p>
+    <h2>Emotions live in the <em>body</em></h2>
+    <p class="lead">A 2014 study mapped where hundreds of people physically felt each emotion. The results were strikingly consistent across cultures — feeling really isn't <b>just</b> in your head.</p>
+    <div class="bodymap">
+      <div class="maplist">
+        <div class="maprow"><span class="sw" style="background:var(--red)"></span><div>Anger <small>— chest &amp; head light up</small></div></div>
+        <div class="maprow"><span class="sw" style="background:var(--teal)"></span><div>Sadness <small>— the whole body dims</small></div></div>
+        <div class="maprow"><span class="sw" style="background:var(--purple)"></span><div>Fear <small>— strength drains from the legs</small></div></div>
+      </div>
+      <div class="figure">
+        <svg viewBox="0 0 130 240" aria-hidden="true">
+          <g fill="none" stroke="#f4f1ea" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="65" cy="30" r="22"/>
+            <path d="M65 52 L65 138"/>
+            <path d="M65 68 L26 104 M65 68 L104 104"/>
+            <path d="M65 138 L44 228 M65 138 L86 228"/>
+          </g>
+          <circle class="z zh" cx="65" cy="30" r="15" fill="#ff6b4a" opacity=".9"/>
+          <circle class="z zc" cx="65" cy="90" r="17" fill="#ff6b4a" opacity=".8"/>
+          <rect class="z zt" x="55" y="82" width="20" height="50" rx="9" fill="#43e0b8" opacity=".5"/>
+          <ellipse class="z zl" cx="48" cy="188" rx="10" ry="30" fill="#a897ff" opacity=".7"/>
+          <ellipse class="z zl" cx="82" cy="188" rx="10" ry="30" fill="#a897ff" opacity=".7"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ei">
+  <div class="inner r">
+    <p class="eyebrow amber">Concept two</p>
+    <h2>Five skills, <em>one</em> intelligence</h2>
+    <p class="lead">Daniel Goleman broke emotional intelligence into five connected skills. Each one is <b>learnable</b> — none is a fixed trait you're simply born with.</p>
+    <div class="grid">
+      <div class="cell"><div class="n">01</div><h3>Self-awareness</h3><p>Noticing your own emotions as they happen.</p></div>
+      <div class="cell"><div class="n">02</div><h3>Self-regulation</h3><p>Managing impulses instead of being ruled by them.</p></div>
+      <div class="cell"><div class="n">03</div><h3>Motivation</h3><p>Using emotion to pursue goals with energy.</p></div>
+      <div class="cell"><div class="n">04</div><h3>Empathy</h3><p>Reading and understanding what others feel.</p></div>
+      <div class="cell"><div class="n">05</div><h3>Social skills</h3><p>Building and steering healthy relationships.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="wellness">
+  <div class="inner r">
+    <p class="eyebrow teal">Concept three</p>
+    <h2>Wellness isn't<br><em>constant happiness</em></h2>
+    <p class="lead">Emotional wellness means accepting the <b>full range</b> of what you feel — including the hard parts. Both extremes carry a real cost. The skill sits in the middle.</p>
+    <div class="spectrum">
+      <div class="pole"><div class="h">Too little</div><strong>Bottling up</strong><span>Suppression raises health risks over time.</span></div>
+      <div class="pole mid"><div class="h">The skill</div><strong>Accept &amp; express</strong><span>Notice it, name it, let it move through.</span></div>
+      <div class="pole"><div class="h">Too much</div><strong>Over-venting</strong><span>Aggressive release spikes stress too.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="inner r">
+    <p class="eyebrow purple">Why it matters</p>
+    <h2>Built for <em>this</em> season of life</h2>
+    <p class="lead">New independence, academic pressure, new relationships, often a new city — all at once. College is exactly where these skills matter most, and exactly where they're least taught.</p>
+    <div class="quote"><p>"The more precisely you can name what you feel, the easier it is to know what you actually need."</p></div>
+    <div class="stat"><p>In a large study of Lebanese adults, those with <b>lower emotional intelligence</b> reported meaningfully more depression, anxiety, and stress (Obeid et al., 2021).</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="inner r">
+    <p class="eyebrow">Sources</p>
+    <h2>Where this comes from</h2>
+    <ul class="srclist">
+      <li><b>Goleman, 1995</b><span>The five components of emotional intelligence.</span></li>
+      <li><b>Nummenmaa et&nbsp;al., 2014</b><span>Bodily maps of emotions, <em>PNAS</em>.</span></li>
+      <li><b>Obeid et&nbsp;al., 2021</b><span>Emotional intelligence &amp; mental health among Lebanese adults.</span></li>
+      <li><b>Salovey &amp; Mayer, 1990</b><span>Foundational definition of emotional intelligence.</span></li>
+    </ul>
+    <p class="colophon">A creative summary for LAS 208 · Wellbeing Matters · Chapter 4</p>
+  </div>
+</footer>
+
+</body>
+</html>
